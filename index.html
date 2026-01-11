@@ -1,45 +1,425 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="{{ current_lang }}">
 <head>
-  <meta charset="UTF-8">
-  <title>сообщение для макса</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
-      font-family: Arial, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ lang.app_name }} - {{ lang.main_page_title if 'main_page_title' in lang else 'Main Page' }}</title>
 
-    .box {
-      background: white;
-      padding: 30px 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      font-size: 22px;
-      text-align: center;
-      animation: appear 1s ease;
-    }
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    @keyframes appear {
-      from {
-        transform: scale(0.7);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-  </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
 </head>
-<body>
-  <div class="box">
-    оближи мне пятки пожалуйста, макс<br>
-    ты мне нравишься
-  </div>
+<body class="main-page-body">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <!-- Logo and Back Button -->
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div class="nav-brand">
+                    <div class="nav-logo">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <span>{{ lang.app_name }} - Main Menu</span>
+                </div>
+            </div>
+
+            <!-- Language Selector -->
+            <div>
+                <select id="languageSelect" class="form-control" style="width: auto; min-width: 120px;">
+                    <option value="en">🇺🇸 English</option>
+                    <option value="pl">🇵🇱 Polski</option>
+                    <option value="ru">🇷🇺 Русский</option>
+                </select>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="hero-gradient">
+            <div class="floating-elements">
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+            </div>
+
+            <div class="container">
+                <!-- Simple Hero -->
+                <div class="hero-simple">
+                    <div class="main-logo-simple">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h1 class="hero-title">{{ lang.app_name }} Dashboard</h1>
+                    <p class="hero-subtitle">
+                        {{ lang.main_page_description if 'main_page_description' in lang else 'Complete list of available analytics modules' }}
+                    </p>
+                </div>
+
+                <!-- FUNCTIONS LIST -->
+                <div class="main-menu-container">
+                    <div class="menu-grid">
+                        <!-- Overdue Analysis -->
+                        <div class="menu-item" onclick="navigateTo('overdue')">
+                            <div class="menu-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="menu-content">
+                                <h3 class="menu-title">{{ lang.overdue_analysis if 'overdue_analysis' in lang else 'Overdue Analysis' }}</h3>
+                                <p class="menu-desc">
+                                    Excel import, real-time tracking, and detailed analytics by categories. Supports multiple file types with comprehensive reporting.
+                                </p>
+                                <div class="menu-badges">
+                                    <span class="menu-badge badge-main">
+                                        <i class="fas fa-crown"></i> Main Module
+                                    </span>
+                                    <span class="menu-badge">
+                                        <i class="fas fa-file-excel"></i> Excel
+                                    </span>
+                                    <span class="menu-badge">
+                                        <i class="fas fa-history"></i> History
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="menu-arrow">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+
+                        <!-- 2nd Sorting Report -->
+                        <div class="menu-item" onclick="navigateTo('second_sorting')">
+                            <div class="menu-icon">
+                                <i class="fas fa-sort-amount-down"></i>
+                            </div>
+                            <div class="menu-content">
+                                <h3 class="menu-title">{{ lang.second_sorting_report if 'second_sorting_report' in lang else '2nd Sorting Report' }}</h3>
+                                <p class="menu-desc">
+                                    Quality control with DPMO calculation, shift-based reporting, exception tracking, and PDF/Excel export capabilities.
+                                </p>
+                                <div class="menu-badges">
+                                    <span class="menu-badge badge-new">
+                                        <i class="fas fa-star"></i> Updated
+                                    </span>
+                                    <span class="menu-badge badge-quality">
+                                        <i class="fas fa-filter"></i> Quality
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="menu-arrow">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+
+                        <!-- Picking Analyzer -->
+                        <div class="menu-item" onclick="navigateTo('picking_analyzer')">
+                            <div class="menu-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="menu-content">
+                                <h3 class="menu-title">Picking Exception Analyzer</h3>
+                                <p class="menu-desc">
+                                    Analyze picking exceptions, calculate DPMO, identify top offenders, and generate detailed reports with warehouse statistics.
+                                </p>
+                                <div class="menu-badges">
+                                    <span class="menu-badge badge-new">
+                                        <i class="fas fa-star"></i> New Module
+                                    </span>
+                                    <span class="menu-badge badge-quality">
+                                        <i class="fas fa-chart-line"></i> Analytics
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="menu-arrow">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+
+                        <!-- DR Report -->
+                        <div class="menu-item" onclick="navigateTo('dr_report')">
+                            <div class="menu-icon">
+                                <i class="fas fa-file-contract"></i>
+                            </div>
+                            <div class="menu-content">
+                                <h3 class="menu-title">{{ lang.dr_report if 'dr_report' in lang else 'DR Report' }}</h3>
+                                <p class="menu-desc">
+                                    Package exception analysis with detailed breakdown by causes and improvement recommendations.
+                                </p>
+                                <div class="menu-badges">
+                                    <span class="menu-badge badge-quality">
+                                        <i class="fas fa-exclamation-triangle"></i> Quality
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="menu-arrow">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+
+                        <!-- Packer Analysis -->
+                        <div class="menu-item" onclick="navigateTo('packer-analysis')">
+                            <div class="menu-icon">
+                                <i class="fas fa-boxes"></i>
+                            </div>
+                            <div class="menu-content">
+                                <h3 class="menu-title">Packer Analysis</h3>
+                                <p class="menu-desc">
+                                    Excel data processing tool for packer performance analysis with automated report generation.
+                                </p>
+                                <div class="menu-badges">
+                                    <span class="menu-badge badge-new">
+                                        <i class="fas fa-bolt"></i> New Tool
+                                    </span>
+                                    <span class="menu-badge">
+                                        <i class="fas fa-cogs"></i> Automation
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="menu-arrow">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+
+                        <!-- Predictive Analytics (in development) -->
+                        <div class="menu-item template" onclick="showComingSoon('predictive_analytics')">
+                            <div class="menu-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="menu-content">
+                                <h3 class="menu-title">{{ lang.predictive_analytics if 'predictive_analytics' in lang else 'Predictive Analytics' }}</h3>
+                                <p class="menu-desc">
+                                    Machine learning forecasting for delays and quality issues with proactive management recommendations.
+                                </p>
+                                <div class="menu-badges">
+                                    <span class="menu-badge badge-dev">
+                                        <i class="fas fa-code"></i> In Development
+                                    </span>
+                                    <span class="menu-badge">
+                                        <i class="fas fa-clock"></i> Q2 2024
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="menu-arrow">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+
+                        <!-- Real-time Dashboard (in development) -->
+                        <div class="menu-item template" onclick="showComingSoon('real_time_monitoring')">
+                            <div class="menu-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <div class="menu-content">
+                                <h3 class="menu-title">{{ lang.real_time_dashboard if 'real_time_dashboard' in lang else 'Real-time Dashboard' }}</h3>
+                                <p class="menu-desc">
+                                    Live monitoring dashboard with real-time metrics, alerts, and interactive visualizations.
+                                </p>
+                                <div class="menu-badges">
+                                    <span class="menu-badge badge-dev">
+                                        <i class="fas fa-calendar-alt"></i> Planned
+                                    </span>
+                                    <span class="menu-badge">
+                                        <i class="fas fa-clock"></i> Q3 2024
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="menu-arrow">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SYSTEM INFORMATION -->
+                    <div class="system-info">
+                        <!-- System Status -->
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <div class="status-indicator active"></div>
+                                <div class="info-card-title">System Status</div>
+                            </div>
+                            <div class="info-card-content">
+                                All modules operating normally
+                                <div class="info-card-stats">
+                                    Active: 4 modules • Response: ~120ms
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Version -->
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <i class="fas fa-code-branch" style="color: var(--color-primary);"></i>
+                                <div class="info-card-title">Version</div>
+                            </div>
+                            <div class="info-card-content">
+                                v2.1.0 • Last update: 24 hours ago
+                            </div>
+                        </div>
+
+                        <!-- Support -->
+                        <div class="info-card">
+                            <div class="info-card-header">
+                                <i class="fas fa-life-ring" style="color: var(--color-info);"></i>
+                                <div class="info-card-title">Support</div>
+                            </div>
+                            <div class="info-card-content">
+                                <a href="#" class="support-link">
+                                    <i class="fas fa-question-circle"></i> Documentation
+                                </a>
+                                <a href="#" class="support-link">
+                                    <i class="fas fa-envelope"></i> Contact Support
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('=== MAIN MENU INITIALIZATION ===');
+
+            // Language selector
+            const langSelect = document.getElementById('languageSelect');
+            if (langSelect) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const lang = urlParams.get('lang') || 'en';
+                langSelect.value = lang;
+
+                langSelect.addEventListener('change', function() {
+                    const selectedLang = this.value;
+                    const currentUrl = new URL(window.location);
+                    currentUrl.searchParams.set('lang', selectedLang);
+                    window.location.href = currentUrl.toString();
+                });
+            }
+
+            // Add animation delays to menu items
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach((item, index) => {
+                item.style.animationDelay = `${0.1 + (index * 0.1)}s`;
+            });
+
+            console.log('✓ Main menu initialized (simple list layout)');
+        });
+
+        function navigateTo(page) {
+            const lang = getCurrentLanguage();
+        
+            const routes = {
+                'overdue': `/dashboard?lang=${lang}`,
+                'second_sorting': `/second-sorting?lang=${lang}`,
+                'dr_report': `/dr-report?lang=${lang}`,
+                'packer-analysis': `/packer-analysis?lang=${lang}`,
+                'picking_analyzer': `/picking-analyzer?lang=${lang}`
+            };
+        
+            if (routes[page]) {
+                console.log(`Navigating to: ${routes[page]}`);
+                window.location.href = routes[page];
+            } else {
+                showComingSoon(page);
+            }
+        }
+
+        function getCurrentLanguage() {
+            const langSelect = document.getElementById('languageSelect');
+            return langSelect ? langSelect.value : 'en';
+        }
+
+        function showComingSoon(moduleName) {
+            const moduleTitles = {
+                'predictive_analytics': '{{ lang.predictive_analytics if 'predictive_analytics' in lang else 'Predictive Analytics' }}',
+                'real_time_monitoring': '{{ lang.real_time_dashboard if 'real_time_dashboard' in lang else 'Real-time Dashboard' }}'
+            };
+
+            const title = moduleTitles[moduleName] || 'New Module';
+
+            // Create notification
+            const notification = document.createElement('div');
+            notification.className = 'coming-soon-notification';
+            notification.innerHTML = `
+                <div style="display: flex; align-items: flex-start; gap: 1rem; padding: 1.25rem; background: rgba(30, 41, 59, 0.95); border-radius: 12px; border-left: 4px solid var(--color-info); max-width: 450px; backdrop-filter: blur(10px); border: 1px solid var(--border-color);">
+                    <div style="width: 50px; height: 50px; background: rgba(168, 85, 247, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--color-info); font-size: 1.5rem;">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">${title}</div>
+                        <div style="font-size: 0.9rem; color: var(--text-tertiary); margin-bottom: 1rem;">
+                            This module is currently in development and will be available soon.
+                        </div>
+                        <div style="display: flex; gap: 0.75rem;">
+                            <button onclick="subscribeToUpdates('${moduleName}')" style="padding: 0.5rem 1rem; background: var(--color-info); color: white; border: none; border-radius: 6px; font-size: 0.85rem; cursor: pointer;">
+                                <i class="fas fa-bell mr-1"></i> Notify Me
+                            </button>
+                            <button onclick="this.parentElement.parentElement.parentElement.remove()" style="padding: 0.5rem 1rem; background: transparent; color: var(--text-tertiary); border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85rem; cursor: pointer;">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Styles for notification
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                z-index: 9999;
+                animation: slideInRight 0.4s ease-out;
+            `;
+
+            // Add animation styles
+            if (!document.querySelector('#notification-animation')) {
+                const style = document.createElement('style');
+                style.id = 'notification-animation';
+                style.textContent = `
+                    @keyframes slideInRight {
+                        from {
+                            transform: translateX(100%);
+                            opacity: 0;
+                        }
+                        to {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+
+            // Remove old notification if exists
+            const oldNotification = document.querySelector('.coming-soon-notification');
+            if (oldNotification) oldNotification.remove();
+
+            document.body.appendChild(notification);
+
+            // Auto remove after 8 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.style.animation = 'slideInRight 0.4s ease-out reverse forwards';
+                    setTimeout(() => {
+                        if (notification.parentElement) notification.remove();
+                    }, 400);
+                }
+            }, 8000);
+        }
+
+        function subscribeToUpdates(moduleName) {
+            alert('You will be notified when this module is released!');
+
+            // Close notification
+            const notification = document.querySelector('.coming-soon-notification');
+            if (notification) notification.remove();
+        }
+    </script>
 </body>
 </html>
